@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adhimukti Trans — Transportasi Wisata Bromo & Kawah Ijen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #EDE6D8;
+            --bg-cream-deep: #E3D9C4;
+            --ink: #1C1712;
+            --ink-soft: #5A5048;
+            --night: #12191F;
+            --night-deep: #0B1116;
+            --sunrise: #E2892C;
+            --sunrise-soft: #F2B36A;
+            --ember: #A84E24;
+            --ijen: #4FA9C7;
+            --ijen-deep: #2E7C97;
+            --line: rgba(28, 23, 18, 0.14);
+            --line-invert: rgba(237, 230, 216, 0.22);
+            --paper: #F6F1E7;
+            --shadow-ticket: 0 18px 40px rgba(28, 23, 18, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--ink);
+            background: var(--bg-cream);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .wrap {
+            width: min(1180px, 92%);
+            margin-inline: auto;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--sunrise);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ---------- NAVBAR ---------- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 22px 0;
+            transition: background-color .35s ease, padding .35s ease, box-shadow .35s ease, border-color .35s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        header.scrolled {
+            background: rgba(237, 230, 216, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: var(--paper);
+            transition: color .35s ease;
+        }
+
+        header.scrolled .brand {
+            color: var(--ink);
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+        }
+
+        .brand-mark path {
+            stroke: currentColor;
+        }
+
+        .brand small {
+            display: block;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.62rem;
+            letter-spacing: 0.06em;
+            color: var(--sunrise-soft);
+            margin-top: 1px;
+        }
+
+        header.scrolled .brand small {
+            color: var(--ember);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 34px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--paper);
+            font-size: 0.92rem;
+            font-weight: 500;
+            position: relative;
+            transition: color .3s ease;
+            padding-bottom: 4px;
+        }
+
+        header.scrolled nav a {
+            color: var(--ink-soft);
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width .3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--sunrise-soft);
+        }
+
+        header.scrolled nav a:hover {
+            color: var(--ember);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 2px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+            transition: transform .25s ease, background-color .25s ease, color .25s ease, border-color .25s ease;
+        }
+
+        .btn-primary {
+            background: var(--sunrise);
+            color: var(--night-deep);
+        }
+
+        .btn-primary:hover {
+            background: var(--sunrise-soft);
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            border-color: var(--line-invert);
+            color: var(--paper);
+        }
+
+        header.scrolled .btn-ghost {
+            border-color: var(--line);
+            color: var(--ink);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--sunrise);
+            color: var(--sunrise-soft);
+        }
+
+        header.scrolled .btn-ghost:hover {
+            color: var(--ember);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 38px;
+            height: 38px;
+            border: none;
+            background: none;
+            color: var(--paper);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        header.scrolled .menu-toggle {
+            color: var(--ink);
+        }
+
+        .menu-toggle span {
+            width: 22px;
+            height: 2px;
+            background: currentColor;
+            transition: transform .3s ease, opacity .3s ease;
+        }
+
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(180deg, var(--night-deep) 0%, #1B2B33 38%, #6B4A2F 70%, var(--sunrise) 100%);
+            overflow: hidden;
+            padding-top: 110px;
+        }
+
+        .hero-scene {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-scene svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(1180px, 92%);
+            margin-inline: auto;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 40px;
+            align-items: end;
+            padding-bottom: 96px;
+        }
+
+        .hero-text {
+            color: var(--paper);
+            max-width: 560px;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.85rem;
+            color: var(--sunrise-soft);
+            font-weight: 500;
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: riseIn .8s ease forwards;
+            animation-delay: .1s;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+            color: var(--paper);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: riseIn .9s ease forwards;
+            animation-delay: .25s;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: rgba(246, 241, 231, 0.82);
+            max-width: 480px;
+            margin-bottom: 34px;
+            opacity: 0;
+            animation: riseIn .9s ease forwards;
+            animation-delay: .42s;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: riseIn .9s ease forwards;
+            animation-delay: .58s;
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            padding: 26px 28px;
+            border-left: 1px solid var(--line-invert);
+            color: var(--paper);
+            opacity: 0;
+            animation: riseIn .9s ease forwards;
+            animation-delay: .75s;
+        }
+
+        .hero-stats .stat-num {
+            font-family: 'Fraunces', serif;
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--sunrise-soft);
+            line-height: 1;
+        }
+
+        .hero-stats .stat-label {
+            font-size: 0.82rem;
+            color: rgba(246, 241, 231, 0.7);
+            margin-top: 6px;
+        }
+
+        /* ---------- SECTION SHELL ---------- */
+        section {
+            padding: 110px 0;
+        }
+
+        .section-head {
+            max-width: 640px;
+            margin-bottom: 56px;
+        }
+
+        .section-kicker {
+            font-size: 0.85rem;
+            color: var(--ember);
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.9rem, 3vw, 2.6rem);
+            margin-bottom: 16px;
+        }
+
+        .section-head p {
+            color: var(--ink-soft);
+            font-size: 1.02rem;
+            max-width: 56ch;
+        }
+
+        /* ---------- ABOUT ---------- */
+        #about {
+            background: var(--paper);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .about-art {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: linear-gradient(160deg, #2C2119 0%, #6E4426 55%, #C9793A 100%);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .about-art svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .about-copy p {
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+            font-size: 1.02rem;
+            max-width: 60ch;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 36px;
+            border-top: 1px solid var(--line);
+        }
+
+        .about-stats div {
+            padding: 22px 20px 0 0;
+            border-right: 1px solid var(--line);
+        }
+
+        .about-stats div:last-child {
+            border-right: none;
+        }
+
+        .about-stats .n {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ember);
+        }
+
+        .about-stats .l {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-top: 4px;
+        }
+
+        /* ---------- SERVICES ---------- */
+        #service {
+            background: var(--bg-cream);
+        }
+
+        .service-list {
+            border-top: 1px solid var(--line);
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 64px 1fr 1.4fr;
+            gap: 32px;
+            align-items: start;
+            padding: 34px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            color: var(--ember);
+        }
+
+        .service-row h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding-top: 6px;
+        }
+
+        .service-row p {
+            color: var(--ink-soft);
+            padding-top: 6px;
+        }
+
+        /* ---------- PACKAGES (ticket style) ---------- */
+        #packages {
+            background: var(--night);
+            color: var(--paper);
+        }
+
+        #packages .section-kicker {
+            color: var(--sunrise-soft);
+        }
+
+        #packages .section-head p {
+            color: rgba(246, 241, 231, 0.72);
+        }
+
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .ticket {
+            background: var(--paper);
+            color: var(--ink);
+            border-radius: 2px;
+            box-shadow: var(--shadow-ticket);
+            display: flex;
+            flex-direction: column;
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .ticket:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 26px 50px rgba(0, 0, 0, 0.35);
+        }
+
+        .ticket-top {
+            padding: 28px 26px 22px;
+            position: relative;
+        }
+
+        .ticket-code {
+            font-size: 0.78rem;
+            color: var(--ember);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
+        }
+
+        .ticket-top h3 {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+
+        .ticket-duration {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+
+        .ticket-price {
+            margin-top: 16px;
+            font-family: 'Fraunces', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--ember);
+        }
+
+        .ticket-price span {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--ink-soft);
+            margin-left: 6px;
+        }
+
+        .ticket-perforation {
+            position: relative;
+            height: 0;
+            border-top: 2px dashed var(--line);
+            margin: 0 0;
+        }
+
+        .ticket-perforation::before,
+        .ticket-perforation::after {
+            content: "";
+            position: absolute;
+            top: -11px;
+            width: 22px;
+            height: 22px;
+            background: var(--night);
+            border-radius: 50%;
+        }
+
+        .ticket-perforation::before {
+            left: -11px;
+        }
+
+        .ticket-perforation::after {
+            right: -11px;
+        }
+
+        .ticket-bottom {
+            padding: 22px 26px 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ticket-bottom ul {
+            list-style: none;
+            margin-bottom: 26px;
+        }
+
+        .ticket-bottom li {
+            font-size: 0.9rem;
+            color: var(--ink-soft);
+            padding: 7px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .ticket-bottom li:last-child {
+            border-bottom: none;
+        }
+
+        .ticket-book {
+            align-self: flex-start;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--ember);
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--ember);
+            transition: opacity .25s ease;
+        }
+
+        .ticket-book:hover {
+            opacity: 0.7;
+        }
+
+        .ticket.is-ijen .ticket-code {
+            color: var(--ijen-deep);
+        }
+
+        .ticket.is-ijen .ticket-price {
+            color: var(--ijen-deep);
+        }
+
+        .ticket.is-ijen .ticket-book {
+            color: var(--ijen-deep);
+            border-color: var(--ijen-deep);
+        }
+
+        /* ---------- TESTIMONIALS ---------- */
+        #testimonials {
+            background: var(--bg-cream-deep);
+        }
+
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border-top: 1px solid var(--line);
+            border-left: 1px solid var(--line);
+        }
+
+        .testi-card {
+            padding: 36px 32px;
+            border-right: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .testi-mark {
+            font-family: 'Fraunces', serif;
+            font-size: 2.6rem;
+            color: var(--ember);
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+
+        .testi-card p {
+            color: var(--ink);
+            font-size: 1rem;
+            margin-bottom: 22px;
+        }
+
+        .testi-name {
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .testi-origin {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-top: 2px;
+        }
+
+        /* ---------- CONTACT ---------- */
+        #contact {
+            background: var(--paper);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 64px;
+        }
+
+        .contact-info dl {
+            display: grid;
+            gap: 26px;
+            margin-top: 8px;
+        }
+
+        .contact-info dt {
+            font-size: 0.82rem;
+            color: var(--ember);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-info dd {
+            font-size: 1.02rem;
+            color: var(--ink);
+        }
+
+        .contact-info dd a:hover {
+            color: var(--ember);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid var(--line);
+            background: var(--bg-cream);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--ink);
+            border-radius: 2px;
+            transition: border-color .25s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--ember);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .form-note {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+
+        #form-success {
+            display: none;
+            padding: 14px 16px;
+            background: #E7EFE4;
+            border: 1px solid #A9C4A0;
+            color: #345B2A;
+            font-size: 0.9rem;
+            border-radius: 2px;
+        }
+
+        #form-success.show {
+            display: block;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            background: var(--night-deep);
+            color: rgba(246, 241, 231, 0.75);
+            padding: 64px 0 32px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 0.8fr;
+            gap: 40px;
+            padding-bottom: 44px;
+            border-bottom: 1px solid var(--line-invert);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--paper);
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .footer-brand svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .footer-top p {
+            max-width: 38ch;
+            font-size: 0.92rem;
+        }
+
+        .footer-col h4 {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--sunrise-soft);
+            margin-bottom: 14px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a {
+            font-size: 0.92rem;
+            transition: color .25s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--sunrise-soft);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 26px;
+            font-size: 0.82rem;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* ---------- MOBILE ---------- */
+        @media (max-width: 940px) {
+            nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: min(320px, 78vw);
+                background: var(--night-deep);
+                transform: translateX(100%);
+                transition: transform .4s ease;
+                padding: 110px 32px 40px;
+                z-index: 99;
+            }
+
+            nav.open {
+                transform: translateX(0);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 26px;
+            }
+
+            nav a {
+                color: var(--paper);
+                font-size: 1.05rem;
+            }
+
+            .nav-actions .btn-ghost {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                border-left: none;
+                border-top: 1px solid var(--line-invert);
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 28px;
+                padding: 22px 0 0;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-art {
+                aspect-ratio: 16/9;
+            }
+
+            .service-row {
+                grid-template-columns: 48px 1fr;
+            }
+
+            .service-row p {
+                grid-column: 2;
+            }
+
+            .ticket-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="site-header">
+        <div class="wrap nav-inner">
+            <a href="logo.jpeg" class="brand">
+                <img src="logo.jpeg" alt="Logo Adhimukti Trans" class="brand-mark">
+                <span>Adhimukti Trans<small>BROMO &nbsp;•&nbsp; KAWAH IJEN</small></span>
+            </a>
+            <nav id="site-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#service">Service</a></li>
+                    <li><a href="#packages">Tour Packages</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-ghost">Hubungi kami</a>
+                <a href="https://wa.me/6281234567890" class="btn btn-primary">Pesan sekarang</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+        <div class="hero-scene" aria-hidden="true">
+            <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+                <!-- sun glow -->
+                <defs>
+                    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#F6C874" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#F6C874" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+                <circle cx="1020" cy="330" r="220" fill="url(#sunGlow)" />
+                <circle cx="1020" cy="330" r="58" fill="#F7D08A" />
+
+                <!-- far ridge (Semeru) -->
+                <path
+                    d="M0 470 L180 330 L260 400 L400 300 L520 430 L700 360 L860 460 L1000 380 L1180 470 L1400 420 L1400 800 L0 800 Z"
+                    fill="#3B2A22" opacity="0.55" />
+
+                <!-- mid ridge with Bromo cone -->
+                <path
+                    d="M0 560 L120 480 L260 540 L360 430 L470 560 L620 470 L760 560 L900 500 L1040 580 L1200 520 L1400 570 L1400 800 L0 800 Z"
+                    fill="#2A1B15" opacity="0.8" />
+
+                <!-- smoke wisp from Bromo -->
+                <path d="M470 560 C 460 520, 500 500, 486 460 C 476 430, 505 420, 500 390" stroke="#EDE6D8"
+                    stroke-opacity="0.35" stroke-width="6" fill="none" stroke-linecap="round" />
+
+                <!-- foreground silhouette -->
+                <path
+                    d="M0 650 L140 590 L300 660 L460 580 L640 660 L820 600 L1000 670 L1180 610 L1400 660 L1400 800 L0 800 Z"
+                    fill="#171310" />
+
+                <!-- jeep silhouette on foreground ridge -->
+                <g transform="translate(760 592)" fill="#171310">
+                    <rect x="0" y="10" width="46" height="18" rx="2" />
+                    <rect x="6" y="-2" width="28" height="14" rx="2" />
+                    <circle cx="10" cy="30" r="7" fill="#0B0906" />
+                    <circle cx="38" cy="30" r="7" fill="#0B0906" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-eyebrow">Transportasi wisata Bromo &amp; Kawah Ijen</p>
+                <h1>Bromo saat fajar, Ijen saat gelap.</h1>
+                <p>Adhimukti Trans mengantar Anda ke dua kawah paling ikonik di Jawa Timur — dengan jeep dan sopir yang
+                    hafal setiap tikungan pasir dan tebing, siang atau tengah malam.</p>
+                <div class="hero-cta">
+                    <a href="https://wa.me/6281234567890" class="btn btn-primary">Pesan perjalanan</a>
+                    <a href="#packages" class="btn btn-ghost">Lihat paket tur</a>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-num">8 thn</div>
+                    <div class="stat-label">Melayani wisatawan Bromo &amp; Ijen</div>
+                </div>
+                <div>
+                    <div class="stat-num">3.400+</div>
+                    <div class="stat-label">Wisatawan diantar tahun lalu</div>
+                </div>
+                <div>
+                    <div class="stat-num">24 jam</div>
+                    <div class="stat-label">Siap dihubungi via WhatsApp</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about">
+        <div class="wrap about-grid">
+            <div class="about-art">
+                <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 320 L80 260 L150 300 L220 230 L300 310 L400 250 L400 500 L0 500 Z" fill="#241A13"
+                        opacity="0.85" />
+                    <path d="M0 380 L100 340 L200 400 L300 350 L400 390 L400 500 L0 500 Z" fill="#140F0A" />
+                    <g transform="translate(150 355)">
+                        <rect x="0" y="18" width="80" height="30" rx="4" fill="#E2892C" />
+                        <rect x="10" y="-4" width="50" height="24" rx="4" fill="#F2B36A" />
+                        <circle cx="16" cy="52" r="12" fill="#140F0A" />
+                        <circle cx="64" cy="52" r="12" fill="#140F0A" />
+                        <circle cx="16" cy="52" r="5" fill="#E3D9C4" />
+                        <circle cx="64" cy="52" r="5" fill="#E3D9C4" />
+                    </g>
+                    <path d="M330 90 C 320 60, 345 45, 335 15" stroke="#EDE6D8" stroke-opacity="0.5" stroke-width="5"
+                        fill="none" stroke-linecap="round" />
+                    <circle cx="70" cy="60" r="34" fill="#F2B36A" opacity="0.9" />
+                </svg>
+            </div>
+
+            <div class="about-copy">
+                <p class="section-kicker">About Us</p>
+                <h2>Kami tahu jalan menuju Bromo dan Ijen, luar dalam.</h2>
+                <p>Adhimukti Trans berdiri sejak 2016 di Probolinggo, pintu masuk paling dekat menuju kawasan Gunung
+                    Bromo. Berawal dari satu unit jeep, kami kini mengoperasikan armada jeep 4x4, Hiace, dan Elf untuk
+                    mengantar wisatawan menembus jalur berpasir Bromo hingga menyusuri jalan berkelok menuju Kawah Ijen.
+                </p>
+                <p>Setiap sopir kami hafal medan, tahu jam keberangkatan terbaik agar tidak ketinggalan matahari terbit,
+                    dan terlatih menjaga penumpang tetap nyaman selama perjalanan dini hari yang dingin dan gelap.</p>
+
+                <div class="about-stats">
+                    <div>
+                        <div class="n">2016</div>
+                        <div class="l">Tahun Adhimukti Trans berdiri</div>
+                    </div>
+                    <div>
+                        <div class="n">45</div>
+                        <div class="l">Sopir dan kru berpengalaman</div>
+                    </div>
+                    <div>
+                        <div class="n">2</div>
+                        <div class="l">Basecamp: Cemoro Lawang &amp; Paltuding</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICE ================= -->
+    <section id="service">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="section-kicker">Service</p>
+                <h2>Layanan yang kami sediakan</h2>
+                <p>Dari jemput di penginapan hingga menunggu Anda selesai memotret kawah, semua bagian perjalanan sudah
+                    kami pikirkan.</p>
+            </div>
+
+            <div class="service-list">
+                <div class="service-row">
+                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 32h36M10 32l3-11h22l3 11" stroke="currentColor" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <circle cx="15" cy="36" r="4" stroke="currentColor" stroke-width="2" />
+                        <circle cx="33" cy="36" r="4" stroke="currentColor" stroke-width="2" />
+                        <path d="M16 21l4-8h8l4 8" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                    </svg>
+                    <h3>Jeep Wisata Bromo</h3>
+                    <p>Antar-jemput dari penginapan sekitar Cemoro Lawang menuju titik matahari terbit di Penanjakan
+                        atau Bukit Kingkong, dilanjutkan ke Kawah Bromo, Pasir Berbisik, dan Bukit Teletubbies.</p>
+                </div>
+
+                <div class="service-row">
+                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 6c6 8 10 14 10 20a10 10 0 1 1-20 0c0-6 4-12 10-20Z" stroke="currentColor"
+                            stroke-width="2" stroke-linejoin="round" />
+                        <path d="M24 20c2 4 4 6 4 9a4 4 0 1 1-8 0c0-3 2-5 4-9Z" stroke="currentColor"
+                            stroke-width="2" />
+                    </svg>
+                    <h3>Tur Kawah Ijen</h3>
+                    <p>Berangkat dini hari dari basecamp Paltuding, mengantar hingga pos pendakian, dan menunggu selama
+                        Anda menyaksikan blue fire serta matahari terbit di bibir kawah.</p>
+                </div>
+
+                <div class="service-row">
+                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                        <circle cx="36" cy="36" r="4" stroke="currentColor" stroke-width="2" />
+                        <path d="M12 16v6a6 6 0 0 0 6 6h12a6 6 0 0 1 6 6" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                    <h3>Transportasi Antar Kota</h3>
+                    <p>Menjemput dan mengantar dari Surabaya, Malang, atau Banyuwangi menuju penginapan dekat Bromo
+                        maupun Ijen, termasuk rute yang menyambungkan kedua gunung dalam satu perjalanan.</p>
+                </div>
+
+                <div class="service-row">
+                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="16" width="30" height="16" rx="3" stroke="currentColor" stroke-width="2" />
+                        <path d="M36 22h6l2 5v5h-8" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                        <circle cx="15" cy="34" r="3.5" stroke="currentColor" stroke-width="2" />
+                        <circle cx="34" cy="34" r="3.5" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                    <h3>Sewa Kendaraan Privat</h3>
+                    <p>Elf dan Hiace untuk rombongan keluarga, komunitas, atau instansi, dengan jadwal yang bisa
+                        disesuaikan di luar paket reguler kami.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PACKAGES ================= -->
+    <section id="packages">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="section-kicker">Tour Packages</p>
+                <h2>Paket tur pilihan</h2>
+                <p>Semua paket sudah termasuk sopir, bahan bakar, dan tiket masuk kawasan. Anda tinggal siapkan jaket
+                    tebal.</p>
+            </div>
+
+            <div class="ticket-grid">
+                <div class="ticket is-bromo">
+                    <div class="ticket-top">
+                        <div class="ticket-code">BRM-01</div>
+                        <h3>Bromo Sunrise</h3>
+                        <div class="ticket-duration">1 hari · berangkat dini hari</div>
+                        <div class="ticket-price">Rp 450rb <span>/ jeep, isi 6 orang</span></div>
+                    </div>
+                    <div class="ticket-perforation"></div>
+                    <div class="ticket-bottom">
+                        <ul>
+                            <li>Jemput di penginapan sekitar Cemoro Lawang</li>
+                            <li>Jeep 4x4 + sopir berpengalaman</li>
+                            <li>Titik pandang matahari terbit pilihan</li>
+                            <li>Kawah Bromo, Pasir Berbisik, Bukit Teletubbies</li>
+                        </ul>
+                        <a href="https://wa.me/6281234567890?text=Saya%20ingin%20booking%20paket%20BRM-01"
+                            class="ticket-book">Pesan paket ini</a>
+                    </div>
+                </div>
+
+                <div class="ticket is-ijen">
+                    <div class="ticket-top">
+                        <div class="ticket-code">IJN-01</div>
+                        <h3>Ijen Blue Fire</h3>
+                        <div class="ticket-duration">1 hari · berangkat tengah malam</div>
+                        <div class="ticket-price">Rp 400rb <span>/ orang</span></div>
+                    </div>
+                    <div class="ticket-perforation"></div>
+                    <div class="ticket-bottom">
+                        <ul>
+                            <li>Jemput di penginapan Banyuwangi / Bondowoso</li>
+                            <li>Transportasi menuju basecamp Paltuding</li>
+                            <li>Masker gas &amp; pengarahan jalur pendakian</li>
+                            <li>Waktu tunggu untuk melihat blue fire &amp; sunrise</li>
+                        </ul>
+                        <a href="https://wa.me/6281234567890?text=Saya%20ingin%20booking%20paket%20IJN-01"
+                            class="ticket-book">Pesan paket ini</a>
+                    </div>
+                </div>
+
+                <div class="ticket is-combo">
+                    <div class="ticket-top">
+                        <div class="ticket-code">BIJ-02</div>
+                        <h3>Bromo &amp; Ijen Combo</h3>
+                        <div class="ticket-duration">2 hari 1 malam</div>
+                        <div class="ticket-price">Rp 1,15jt <span>/ orang</span></div>
+                    </div>
+                    <div class="ticket-perforation"></div>
+                    <div class="ticket-bottom">
+                        <ul>
+                            <li>Seluruh rute paket Bromo Sunrise</li>
+                            <li>Transfer malam menuju kawasan Ijen</li>
+                            <li>Penginapan transit &amp; sarapan</li>
+                            <li>Dilanjutkan tur Kawah Ijen keesokan dini hari</li>
+                        </ul>
+                        <a href="https://wa.me/6281234567890?text=Saya%20ingin%20booking%20paket%20BIJ-02"
+                            class="ticket-book">Pesan paket ini</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section id="testimonials">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="section-kicker">Testimonials</p>
+                <h2>Cerita dari penumpang kami</h2>
+                <p>Sebagian kecil dari yang mereka ceritakan sepulang dari Bromo dan Ijen.</p>
+            </div>
+
+            <div class="testi-grid">
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Sopirnya sabar menunggu kami memotret di Penanjakan, padahal masih gelap dan dingin sekali.
+                        Jeepnya juga selalu bersih setiap kami naik.</p>
+                    <div class="testi-name">Dewi Anggraini</div>
+                    <div class="testi-origin">Surabaya</div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Baru pertama kali naik ke Ijen dan sempat khawatir soal jalur yang gelap, tapi tim Adhimukti
+                        memberi pengarahan jelas sebelum kami berangkat.</p>
+                    <div class="testi-name">Marco Bellini</div>
+                    <div class="testi-origin">Italia</div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Pesan paket combo Bromo-Ijen dan semua jadwalnya pas, tidak ada waktu terbuang di jalan meskipun
+                        perjalanannya panjang.</p>
+                    <div class="testi-name">Rina Kusuma</div>
+                    <div class="testi-origin">Malang</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact">
+        <div class="wrap contact-grid">
+            <div class="contact-info">
+                <p class="section-kicker">Contact</p>
+                <h2>Rencanakan perjalanan Anda</h2>
+                <p style="color:var(--ink-soft); margin-top:14px; max-width:42ch;">Kirim tanggal dan tujuan yang Anda
+                    inginkan, tim kami akan membalas dalam beberapa jam untuk menyusun jadwal terbaik.</p>
+
+                <dl>
+                    <div>
+                        <dt>WhatsApp</dt>
+                        <dd><a href="https://wa.me/6281234567890">+62 812-3456-7890</a></dd>
+                    </div>
+                    <div>
+                        <dt>Email</dt>
+                        <dd><a href="mailto:hello@adhimuktitrans.com">hello@adhimuktitrans.com</a></dd>
+                    </div>
+                    <div>
+                        <dt>Basecamp</dt>
+                        <dd>Jl. Raya Cemoro Lawang, Probolinggo, Jawa Timur</dd>
+                    </div>
+                    <div>
+                        <dt>Jam operasional</dt>
+                        <dd>24 jam, siap merespon pesan kapan saja</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <form id="contactForm">
+                <div class="field-row">
+                    <div>
+                        <label for="name">Nama lengkap</label>
+                        <input id="name" type="text" placeholder="Nama Anda" required>
+                    </div>
+                    <div>
+                        <label for="phone">Nomor WhatsApp</label>
+                        <input id="phone" type="tel" placeholder="08xx-xxxx-xxxx" required>
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div>
+                        <label for="date">Tanggal keberangkatan</label>
+                        <input id="date" type="date">
+                    </div>
+                    <div>
+                        <label for="dest">Tujuan</label>
+                        <input id="dest" type="text" placeholder="Bromo, Ijen, atau keduanya">
+                    </div>
+                </div>
+                <div>
+                    <label for="message">Pesan</label>
+                    <textarea id="message"
+                        placeholder="Ceritakan jumlah orang, penginapan, atau kebutuhan khusus lainnya"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Kirim permintaan</button>
+                <p class="form-note">Atau langsung chat kami di WhatsApp untuk balasan lebih cepat.</p>
+                <div id="form-success">Terima kasih, permintaan Anda sudah kami terima. Tim kami akan menghubungi Anda
+                    melalui WhatsApp.</div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="wrap">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-brand">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 30L14 14L20 22L26 12L36 30" stroke="currentColor" stroke-width="2"
+                                stroke-linejoin="round" stroke-linecap="round" />
+                            <circle cx="28" cy="10" r="3.2" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                        Adhimukti Trans
+                    </div>
+                    <p>Transportasi wisata menuju Gunung Bromo dan Kawah Ijen, dengan sopir berpengalaman dan armada
+                        yang selalu siap.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigasi</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#service">Service</a></li>
+                        <li><a href="#packages">Tour Packages</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Terhubung</h4>
+                    <ul>
+                        <li><a href="https://wa.me/6281234567890">WhatsApp</a></li>
+                        <li><a href="mailto:hello@adhimuktitrans.com">Email</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Adhimukti Trans. Semua hak dilindungi.</span>
+                <span>Probolinggo, Jawa Timur, Indonesia</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        const menuToggle = document.getElementById('menuToggle');
+        const siteNav = document.getElementById('site-nav');
+        menuToggle.addEventListener('click', () => {
+            const open = siteNav.classList.toggle('open');
+            menuToggle.classList.toggle('open', open);
+            menuToggle.setAttribute('aria-expanded', open);
+        });
+        siteNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                siteNav.classList.remove('open');
+                menuToggle.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', false);
+            });
+        });
+
+        const form = document.getElementById('contactForm');
+        const success = document.getElementById('form-success');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            success.classList.add('show');
+            form.querySelectorAll('input, textarea').forEach(f => f.value = '');
+        });
+    </script>
+
+</body>
+
+</html>
