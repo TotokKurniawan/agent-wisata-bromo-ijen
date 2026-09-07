@@ -794,23 +794,73 @@
             transform: translateY(0);
         }
 
-        /* ---------- TESTIMONIALS ---------- */
+        /* ---------- TESTIMONIALS SLIDER ---------- */
         #testimonials {
             background: var(--bg-cream-deep);
+            overflow: hidden;
         }
 
-        .testi-grid {
+        .testi-header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .testi-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .testi-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--paper);
+            color: var(--ink);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+        }
+
+        .testi-btn:hover {
+            background: var(--ember);
+            border-color: var(--ember);
+            color: var(--paper);
+        }
+
+        .testi-slider-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            border-top: 1px solid var(--line);
-            border-left: 1px solid var(--line);
+            grid-auto-flow: column;
+            grid-auto-columns: calc(33.333% - 14px);
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            /* Hilangkan scrollbar di Firefox */
+        }
+
+        .testi-slider-container::-webkit-scrollbar {
+            display: none;
+            /* Hilangkan scrollbar di Chrome/Safari */
         }
 
         .testi-card {
+            background: var(--paper);
             padding: 36px 32px;
-            border-right: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
+            border-radius: 2px;
+            border: 1px solid var(--line);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
         }
 
         .testi-mark {
@@ -825,6 +875,7 @@
             color: var(--ink);
             font-size: 1rem;
             margin-bottom: 22px;
+            flex: 1;
         }
 
         .testi-name {
@@ -836,6 +887,24 @@
             font-size: 0.82rem;
             color: var(--ink-soft);
             margin-top: 2px;
+        }
+
+        /* Responsif Slider untuk Layar Lebih Kecil */
+        @media (max-width: 940px) {
+            .testi-slider-container {
+                grid-auto-columns: calc(50% - 10px);
+            }
+
+            .testi-header-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .testi-slider-container {
+                grid-auto-columns: 100%;
+            }
         }
 
         /* ---------- CONTACT ---------- */
@@ -1327,11 +1396,20 @@
     <!-- ================= TESTIMONIALS ================= -->
     <section id="testimonials">
         <div class="wrap">
-            <div class="section-head">
-                <p class="section-kicker">Testimoni</p>
-                <h2>Apa kata mereka tentang perjalanan ini?</h2>
+            <div class="testi-header-wrapper">
+                <div class="section-head" style="margin-bottom: 0;">
+                    <p class="section-kicker">Testimoni</p>
+                    <h2>Apa kata mereka tentang perjalanan ini?</h2>
+                </div>
+                <!-- Tombol Navigasi Geser -->
+                <div class="testi-controls">
+                    <button class="testi-btn" id="prevBtn" aria-label="Geser ke kiri">&#8592;</button>
+                    <button class="testi-btn" id="nextBtn" aria-label="Geser ke kanan">&#8594;</button>
+                </div>
             </div>
-            <div class="testi-grid">
+
+            <!-- Container Geser -->
+            <div class="testi-slider-container" id="testiSlider">
                 <div class="testi-card">
                     <div class="testi-mark">“</div>
                     <p>Driver ramah banget dan tepat waktu pas jemput jam 2 pagi. Bawa jeep-nya sangat lihai melintasi
@@ -1352,6 +1430,27 @@
                         penjemputan stasiun sampai balik lagi.</p>
                     <div class="testi-name">Ibu Kartika</div>
                     <div class="testi-origin">Surabaya</div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Sangat recommended! Sunrise di penanjakan Bromo bener-bener on time dan jeep-nya juga nyaman
+                        tidak mudah mogok di tanjakan ekstrem.</p>
+                    <div class="testi-name">Dimas Prasetyo</div>
+                    <div class="testi-origin">Bandung</div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Blue Fire Ijen-nya juara, walau capek nanjak tapi worth it banget karena dibimbing tour guide
+                        lokal yang sigap pegangin tangan pas medan licin.</p>
+                    <div class="testi-name">Anisa Rahma</div>
+                    <div class="testi-origin">Yogyakarta</div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Pelayanan dari awal chat WhatsApp sampai kelar tour memuaskan. Driver sabar banget diajak
+                        foto-foto dan ngasih spot view terbaik.</p>
+                    <div class="testi-name">Fajar Nugroho</div>
+                    <div class="testi-origin">Semarang</div>
                 </div>
             </div>
         </div>
@@ -1545,6 +1644,21 @@
                 menuToggle.setAttribute('aria-expanded', 'false');
             });
         });
+
+        // Testimonial Slider Controls
+        const slider = document.getElementById('testiSlider');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        if (slider && prevBtn && nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                slider.scrollBy({ left: slider.clientWidth / 2 + 100, behavior: 'smooth' });
+            });
+
+            prevBtn.addEventListener('click', () => {
+                slider.scrollBy({ left: -(slider.clientWidth / 2 + 100), behavior: 'smooth' });
+            });
+        }
 
         // Form Submit Redirect to WhatsApp
         const contactForm = document.getElementById('contactForm');
