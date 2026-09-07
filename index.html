@@ -358,6 +358,59 @@
             animation-delay: .58s;
         }
 
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: crossfade 10s infinite ease-in-out;
+        }
+
+        .slide-1 {
+            animation-delay: 0s;
+        }
+
+        .slide-2 {
+            animation-delay: 5s;
+        }
+
+        @keyframes crossfade {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 0;
+                transform: scale(1.05);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(11, 17, 22, 0.65) 0%, rgba(11, 17, 22, 0.85) 100%);
+            z-index: 1;
+        }
+
         @keyframes riseIn {
             from {
                 opacity: 0;
@@ -1084,13 +1137,9 @@
     <!-- ================= HERO ================= -->
     <section class="hero" id="home">
         <!-- Dual Photo Background -->
-        <div class="hero-scene hero-photos" aria-hidden="true">
-            <div class="hero-photo-item">
-                <img src="bromo.jpg" alt="Bromo">
-            </div>
-            <div class="hero-photo-item">
-                <img src="ijen.jpeg" alt="Ijen">
-            </div>
+        <div class="hero-scene hero-slider" aria-hidden="true">
+            <div class="slide slide-1" style="background-image: url('bromo.jpg');"></div>
+            <div class="slide slide-2" style="background-image: url('ijen.jpeg');"></div>
             <div class="hero-overlay"></div>
         </div>
 
