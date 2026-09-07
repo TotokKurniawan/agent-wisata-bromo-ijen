@@ -1083,45 +1083,15 @@
 
     <!-- ================= HERO ================= -->
     <section class="hero" id="home">
-        <div class="hero-scene" aria-hidden="true">
-            <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-                <!-- sun glow -->
-                <defs>
-                    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#F6C874" stop-opacity="0.9" />
-                        <stop offset="100%" stop-color="#F6C874" stop-opacity="0" />
-                    </radialGradient>
-                </defs>
-                <circle cx="1020" cy="330" r="220" fill="url(#sunGlow)" />
-                <circle cx="1020" cy="330" r="58" fill="#F7D08A" />
-
-                <!-- far ridge (Semeru) -->
-                <path
-                    d="M0 470 L180 330 L260 400 L400 300 L520 430 L700 360 L860 460 L1000 380 L1180 470 L1400 420 L1400 800 L0 800 Z"
-                    fill="#3B2A22" opacity="0.55" />
-
-                <!-- mid ridge with Bromo cone -->
-                <path
-                    d="M0 560 L120 480 L260 540 L360 430 L470 560 L620 470 L760 560 L900 500 L1040 580 L1200 520 L1400 570 L1400 800 L0 800 Z"
-                    fill="#2A1B15" opacity="0.8" />
-
-                <!-- smoke wisp from Bromo -->
-                <path d="M470 560 C 460 520, 500 500, 486 460 C 476 430, 505 420, 500 390" stroke="#EDE6D8"
-                    stroke-opacity="0.35" stroke-width="6" fill="none" stroke-linecap="round" />
-
-                <!-- foreground silhouette -->
-                <path
-                    d="M0 650 L140 590 L300 660 L460 580 L640 660 L820 600 L1000 670 L1180 610 L1400 660 L1400 800 L0 800 Z"
-                    fill="#171310" />
-
-                <!-- jeep silhouette on foreground ridge -->
-                <g transform="translate(760 592)" fill="#171310">
-                    <rect x="0" y="10" width="46" height="18" rx="2" />
-                    <rect x="6" y="-2" width="28" height="14" rx="2" />
-                    <circle cx="10" cy="30" r="7" fill="#0B0906" />
-                    <circle cx="38" cy="30" r="7" fill="#0B0906" />
-                </g>
-            </svg>
+        <!-- Dual Photo Background -->
+        <div class="hero-scene hero-photos" aria-hidden="true">
+            <div class="hero-photo-item">
+                <img src="bromo.jpg" alt="Bromo">
+            </div>
+            <div class="hero-photo-item">
+                <img src="ijen.jpeg" alt="Ijen">
+            </div>
+            <div class="hero-overlay"></div>
         </div>
 
         <div class="hero-content">
@@ -1152,7 +1122,6 @@
             </div>
         </div>
     </section>
-
     <!-- ================= ABOUT ================= -->
     <section id="about">
         <div class="wrap about-grid">
