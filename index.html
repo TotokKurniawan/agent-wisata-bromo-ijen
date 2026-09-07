@@ -138,10 +138,8 @@
             width: 34px;
             height: 34px;
             flex-shrink: 0;
-        }
-
-        .brand-mark path {
-            stroke: currentColor;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .brand small {
@@ -676,6 +674,73 @@
             border-color: var(--ijen-deep);
         }
 
+        /* ---------- GALLERY ---------- */
+        #gallery {
+            background: var(--paper);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-radius: 2px;
+            background: var(--bg-cream-deep);
+            box-shadow: 0 4px 12px rgba(28, 23, 18, 0.08);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(18, 25, 31, 0) 40%, rgba(18, 25, 31, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            color: var(--paper);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.1rem;
+            color: var(--paper);
+            transform: translateY(10px);
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.8rem;
+            color: var(--sunrise-soft);
+            transform: translateY(10px);
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-overlay h3,
+        .gallery-item:hover .gallery-overlay p {
+            transform: translateY(0);
+        }
+
         /* ---------- TESTIMONIALS ---------- */
         #testimonials {
             background: var(--bg-cream-deep);
@@ -842,9 +907,11 @@
             margin-bottom: 14px;
         }
 
-        .footer-brand svg {
+        .footer-brand img {
             width: 28px;
             height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .footer-top p {
@@ -956,6 +1023,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .testi-grid {
                 grid-template-columns: 1fr;
             }
@@ -972,6 +1043,12 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 560px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -979,7 +1056,7 @@
 
     <header id="site-header">
         <div class="wrap nav-inner">
-            <a href="logo.jpeg" class="brand">
+            <a href="#home" class="brand">
                 <img src="logo.jpeg" alt="Logo Adhimukti Trans" class="brand-mark">
                 <span>Adhimukti Trans<small>BROMO &nbsp;•&nbsp; KAWAH IJEN</small></span>
             </a>
@@ -1087,39 +1164,30 @@
                     <g transform="translate(150 355)">
                         <rect x="0" y="18" width="80" height="30" rx="4" fill="#E2892C" />
                         <rect x="10" y="-4" width="50" height="24" rx="4" fill="#F2B36A" />
-                        <circle cx="16" cy="52" r="12" fill="#140F0A" />
-                        <circle cx="64" cy="52" r="12" fill="#140F0A" />
-                        <circle cx="16" cy="52" r="5" fill="#E3D9C4" />
-                        <circle cx="64" cy="52" r="5" fill="#E3D9C4" />
+                        <circle cx="16" cy="48" r="8" fill="#140F0A" />
+                        <circle cx="64" cy="48" r="8" fill="#140F0A" />
                     </g>
-                    <path d="M330 90 C 320 60, 345 45, 335 15" stroke="#EDE6D8" stroke-opacity="0.5" stroke-width="5"
-                        fill="none" stroke-linecap="round" />
-                    <circle cx="70" cy="60" r="34" fill="#F2B36A" opacity="0.9" />
                 </svg>
             </div>
-
             <div class="about-copy">
-                <p class="section-kicker">About Us</p>
-                <h2>Kami tahu jalan menuju Bromo dan Ijen, luar dalam.</h2>
-                <p>Adhimukti Trans berdiri sejak 2016 di Probolinggo, pintu masuk paling dekat menuju kawasan Gunung
-                    Bromo. Berawal dari satu unit jeep, kami kini mengoperasikan armada jeep 4x4, Hiace, dan Elf untuk
-                    mengantar wisatawan menembus jalur berpasir Bromo hingga menyusuri jalan berkelok menuju Kawah Ijen.
-                </p>
-                <p>Setiap sopir kami hafal medan, tahu jam keberangkatan terbaik agar tidak ketinggalan matahari terbit,
-                    dan terlatih menjaga penumpang tetap nyaman selama perjalanan dini hari yang dingin dan gelap.</p>
-
+                <p class="section-kicker">Tentang Adhimukti Trans</p>
+                <h2>Pengalaman medan ekstrem dengan kenyamanan penuh.</h2>
+                <p>Kami berawal dari komunitas pengemudi lokal Probolinggo dan Banyuwangi yang memahami betul karakter
+                    alam Gunung Bromo dan Kawah Ijen.</p>
+                <p>Armada jeep 4x4 kami selalu dirawat secara berkala untuk memastikan keamanan Anda melintasi lautan
+                    pasir Bromo maupun tanjakan tajam Paltuding Ijen.</p>
                 <div class="about-stats">
                     <div>
-                        <div class="n">2016</div>
-                        <div class="l">Tahun Adhimukti Trans berdiri</div>
+                        <div class="n">100%</div>
+                        <div class="l">Lokal &amp; Berpengalaman</div>
                     </div>
                     <div>
-                        <div class="n">45</div>
-                        <div class="l">Sopir dan kru berpengalaman</div>
+                        <div class="n">4x4</div>
+                        <div class="l">Armada Jeep Prima</div>
                     </div>
                     <div>
-                        <div class="n">2</div>
-                        <div class="l">Basecamp: Cemoro Lawang &amp; Paltuding</div>
+                        <div class="n">4.9/5</div>
+                        <div class="l">Rating Kepuasan</div>
                     </div>
                 </div>
             </div>
@@ -1130,59 +1198,37 @@
     <section id="service">
         <div class="wrap">
             <div class="section-head">
-                <p class="section-kicker">Service</p>
-                <h2>Layanan yang kami sediakan</h2>
-                <p>Dari jemput di penginapan hingga menunggu Anda selesai memotret kawah, semua bagian perjalanan sudah
-                    kami pikirkan.</p>
+                <p class="section-kicker">Layanan Kami</p>
+                <h2>Didesain untuk fleksibilitas perjalanan Anda.</h2>
+                <p>Dari antar-jemput stasiun/bandara hingga sewa jeep private untuk fotografi profesional.</p>
             </div>
-
             <div class="service-list">
                 <div class="service-row">
-                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 32h36M10 32l3-11h22l3 11" stroke="currentColor" stroke-width="2"
-                            stroke-linejoin="round" />
-                        <circle cx="15" cy="36" r="4" stroke="currentColor" stroke-width="2" />
-                        <circle cx="33" cy="36" r="4" stroke="currentColor" stroke-width="2" />
-                        <path d="M16 21l4-8h8l4 8" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                    <svg class="service-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M8 7h8m-8 4h8m-8 4h4m-6 5h12a2 2 0 002-2V5a2 2 0 00-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
-                    <h3>Jeep Wisata Bromo</h3>
-                    <p>Antar-jemput dari penginapan sekitar Cemoro Lawang menuju titik matahari terbit di Penanjakan
-                        atau Bukit Kingkong, dilanjutkan ke Kawah Bromo, Pasir Berbisik, dan Bukit Teletubbies.</p>
+                    <h3>Sewa Jeep Bromo Private</h3>
+                    <p>Penjemputan dari Sukapura, Cemoro Lawang, atau Malang. Mencakup Penanjakan Sunrise, Widodaren,
+                        Kawah Bromo, Pasir Berbisik, dan Savana Telletubies.</p>
                 </div>
-
                 <div class="service-row">
-                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24 6c6 8 10 14 10 20a10 10 0 1 1-20 0c0-6 4-12 10-20Z" stroke="currentColor"
-                            stroke-width="2" stroke-linejoin="round" />
-                        <path d="M24 20c2 4 4 6 4 9a4 4 0 1 1-8 0c0-3 2-5 4-9Z" stroke="currentColor"
-                            stroke-width="2" />
+                    <svg class="service-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
-                    <h3>Tur Kawah Ijen</h3>
-                    <p>Berangkat dini hari dari basecamp Paltuding, mengantar hingga pos pendakian, dan menunggu selama
-                        Anda menyaksikan blue fire serta matahari terbit di bibir kawah.</p>
+                    <h3>Tour Blue Fire Kawah Ijen</h3>
+                    <p>Penjemputan midnight dari Banyuwangi atau Bondowoso. Termasuk pemandu lokal licensed, masker gas
+                        standar respirator, dan tiket masuk.</p>
                 </div>
-
                 <div class="service-row">
-                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
-                        <circle cx="36" cy="36" r="4" stroke="currentColor" stroke-width="2" />
-                        <path d="M12 16v6a6 6 0 0 0 6 6h12a6 6 0 0 1 6 6" stroke="currentColor" stroke-width="2" />
+                    <svg class="service-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                     </svg>
-                    <h3>Transportasi Antar Kota</h3>
-                    <p>Menjemput dan mengantar dari Surabaya, Malang, atau Banyuwangi menuju penginapan dekat Bromo
-                        maupun Ijen, termasuk rute yang menyambungkan kedua gunung dalam satu perjalanan.</p>
-                </div>
-
-                <div class="service-row">
-                    <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="6" y="16" width="30" height="16" rx="3" stroke="currentColor" stroke-width="2" />
-                        <path d="M36 22h6l2 5v5h-8" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                        <circle cx="15" cy="34" r="3.5" stroke="currentColor" stroke-width="2" />
-                        <circle cx="34" cy="34" r="3.5" stroke="currentColor" stroke-width="2" />
-                    </svg>
-                    <h3>Sewa Kendaraan Privat</h3>
-                    <p>Elf dan Hiace untuk rombongan keluarga, komunitas, atau instansi, dengan jadwal yang bisa
-                        disesuaikan di luar paket reguler kami.</p>
+                    <h3>Overland Bromo - Ijen - Bali</h3>
+                    <p>Layanan paket jalan bersambung dari Surabaya/Malang menuju Bromo, lanjut ke Ijen, dan pengantaran
+                        akhir hingga pelabuhan Ketapang / hotel di Bali.</p>
                 </div>
             </div>
         </div>
@@ -1192,70 +1238,68 @@
     <section id="packages">
         <div class="wrap">
             <div class="section-head">
-                <p class="section-kicker">Tour Packages</p>
-                <h2>Paket tur pilihan</h2>
-                <p>Semua paket sudah termasuk sopir, bahan bakar, dan tiket masuk kawasan. Anda tinggal siapkan jaket
-                    tebal.</p>
+                <p class="section-kicker">Paket Populer</p>
+                <h2>Pilih tiket perjalanan Anda.</h2>
+                <p>Harga transparan tanpa biaya tersembunyi. Sudah termasuk BBM, driver, dan parkir.</p>
             </div>
-
             <div class="ticket-grid">
-                <div class="ticket is-bromo">
+                <div class="ticket">
                     <div class="ticket-top">
-                        <div class="ticket-code">BRM-01</div>
-                        <h3>Bromo Sunrise</h3>
-                        <div class="ticket-duration">1 hari · berangkat dini hari</div>
-                        <div class="ticket-price">Rp 450rb <span>/ jeep, isi 6 orang</span></div>
+                        <div class="ticket-code">PKG-BRM-01</div>
+                        <h3>Bromo Sunrise Midnight</h3>
+                        <div class="ticket-duration">12 Jam &bull; Private Tour</div>
+                        <div class="ticket-price">Rp 750k <span>/ jeep (max 6 org)</span></div>
                     </div>
                     <div class="ticket-perforation"></div>
                     <div class="ticket-bottom">
                         <ul>
-                            <li>Jemput di penginapan sekitar Cemoro Lawang</li>
-                            <li>Jeep 4x4 + sopir berpengalaman</li>
-                            <li>Titik pandang matahari terbit pilihan</li>
-                            <li>Kawah Bromo, Pasir Berbisik, Bukit Teletubbies</li>
+                            <li>Jeep Hardtop 4x4 + Driver Bensin</li>
+                            <li>Spot Penanjakan 1 / Kingkong Hill</li>
+                            <li>Kawah Bromo &amp; Lautan Pasir</li>
+                            <li>Savana &amp; Bukit Teletubbies</li>
                         </ul>
-                        <a href="https://wa.me/6281234567890?text=Saya%20ingin%20booking%20paket%20BRM-01"
-                            class="ticket-book">Pesan paket ini</a>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Adhimukti%20Trans,%20saya%20ingin%20pesan%20Paket%20Bromo%20Sunrise"
+                            class="ticket-book">Pesan Paket Ini &rarr;</a>
                     </div>
                 </div>
 
                 <div class="ticket is-ijen">
                     <div class="ticket-top">
-                        <div class="ticket-code">IJN-01</div>
-                        <h3>Ijen Blue Fire</h3>
-                        <div class="ticket-duration">1 hari · berangkat tengah malam</div>
-                        <div class="ticket-price">Rp 400rb <span>/ orang</span></div>
+                        <div class="ticket-code">PKG-IJN-02</div>
+                        <h3>Ijen Blue Fire Tour</h3>
+                        <div class="ticket-duration">8 Jam &bull; Private Tour</div>
+                        <div class="ticket-price">Rp 650k <span>/ mobil (max 5 org)</span></div>
                     </div>
                     <div class="ticket-perforation"></div>
                     <div class="ticket-bottom">
                         <ul>
-                            <li>Jemput di penginapan Banyuwangi / Bondowoso</li>
-                            <li>Transportasi menuju basecamp Paltuding</li>
-                            <li>Masker gas &amp; pengarahan jalur pendakian</li>
-                            <li>Waktu tunggu untuk melihat blue fire &amp; sunrise</li>
+                            <li>Transport PP Banyuwangi - Paltuding</li>
+                            <li>Masker Gas Respirator Standar</li>
+                            <li>Guide Lokal Trekking Ijen</li>
+                            <li>Bonus Air Mineral &amp; Snack</li>
                         </ul>
-                        <a href="https://wa.me/6281234567890?text=Saya%20ingin%20booking%20paket%20IJN-01"
-                            class="ticket-book">Pesan paket ini</a>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Adhimukti%20Trans,%20saya%20ingin%20pesan%20Paket%20Ijen%20Blue%20Fire"
+                            class="ticket-book">Pesan Paket Ini &rarr;</a>
                     </div>
                 </div>
 
-                <div class="ticket is-combo">
+                <div class="ticket">
                     <div class="ticket-top">
-                        <div class="ticket-code">BIJ-02</div>
-                        <h3>Bromo &amp; Ijen Combo</h3>
-                        <div class="ticket-duration">2 hari 1 malam</div>
-                        <div class="ticket-price">Rp 1,15jt <span>/ orang</span></div>
+                        <div class="ticket-code">PKG-CBO-03</div>
+                        <h3>Combo Bromo + Ijen 3D2N</h3>
+                        <div class="ticket-duration">3 Hari 2 Malam &bull; All-In</div>
+                        <div class="ticket-price">Rp 2.450k <span>/ pax (min 2 org)</span></div>
                     </div>
                     <div class="ticket-perforation"></div>
                     <div class="ticket-bottom">
                         <ul>
-                            <li>Seluruh rute paket Bromo Sunrise</li>
-                            <li>Transfer malam menuju kawasan Ijen</li>
-                            <li>Penginapan transit &amp; sarapan</li>
-                            <li>Dilanjutkan tur Kawah Ijen keesokan dini hari</li>
+                            <li>Penjemputan Surabaya / Malang</li>
+                            <li>Akomodasi Hotel 2 Malam</li>
+                            <li>Jeep Bromo + Transport Ijen</li>
+                            <li>Tiket Masuk Semua Objek Wisata</li>
                         </ul>
-                        <a href="https://wa.me/6281234567890?text=Saya%20ingin%20booking%20paket%20BIJ-02"
-                            class="ticket-book">Pesan paket ini</a>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Adhimukti%20Trans,%20saya%20ingin%20pesan%20Paket%20Combo%20Bromo%20Ijen"
+                            class="ticket-book">Pesan Paket Ini &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -1266,32 +1310,91 @@
     <section id="testimonials">
         <div class="wrap">
             <div class="section-head">
-                <p class="section-kicker">Testimonials</p>
-                <h2>Cerita dari penumpang kami</h2>
-                <p>Sebagian kecil dari yang mereka ceritakan sepulang dari Bromo dan Ijen.</p>
+                <p class="section-kicker">Testimoni</p>
+                <h2>Apa kata mereka tentang perjalanan ini?</h2>
             </div>
-
             <div class="testi-grid">
                 <div class="testi-card">
                     <div class="testi-mark">“</div>
-                    <p>Sopirnya sabar menunggu kami memotret di Penanjakan, padahal masih gelap dan dingin sekali.
-                        Jeepnya juga selalu bersih setiap kami naik.</p>
-                    <div class="testi-name">Dewi Anggraini</div>
+                    <p>Driver ramah banget dan tepat waktu pas jemput jam 2 pagi. Bawa jeep-nya sangat lihai melintasi
+                        pasir Bromo, merasa aman sepanjang jalan.</p>
+                    <div class="testi-name">Rian Hidayat</div>
+                    <div class="testi-origin">Jakarta Selatan</div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Pengalaman ke Ijen luar biasa! Masker gas bersih dan wangi, guide lokal yang disediakan juga
+                        sabar nungguin kami trekking santai.</p>
+                    <div class="testi-name">Sarah &amp; David</div>
+                    <div class="testi-origin">Wisatawan Mancanegara</div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-mark">“</div>
+                    <p>Pesan paket combo 3D2N untuk rombongan keluarga. Semuanya diurus dengan sangat rapi dari
+                        penjemputan stasiun sampai balik lagi.</p>
+                    <div class="testi-name">Ibu Kartika</div>
                     <div class="testi-origin">Surabaya</div>
                 </div>
-                <div class="testi-card">
-                    <div class="testi-mark">“</div>
-                    <p>Baru pertama kali naik ke Ijen dan sempat khawatir soal jalur yang gelap, tapi tim Adhimukti
-                        memberi pengarahan jelas sebelum kami berangkat.</p>
-                    <div class="testi-name">Marco Bellini</div>
-                    <div class="testi-origin">Italia</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= GALLERY ================= -->
+    <section id="gallery">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="section-kicker">Galeri Dokumentasi</p>
+                <h2>Momen perjalanan bersama kami.</h2>
+                <p>Beberapa cuplikan keindahan alam Bromo dan Kawah Ijen yang siap Anda nikmati secara langsung.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80"
+                        alt="Sunrise Gunung Bromo">
+                    <div class="gallery-overlay">
+                        <h3>Sunrise Penanjakan</h3>
+                        <p>Gunung Bromo</p>
+                    </div>
                 </div>
-                <div class="testi-card">
-                    <div class="testi-mark">“</div>
-                    <p>Pesan paket combo Bromo-Ijen dan semua jadwalnya pas, tidak ada waktu terbuang di jalan meskipun
-                        perjalanannya panjang.</p>
-                    <div class="testi-name">Rina Kusuma</div>
-                    <div class="testi-origin">Malang</div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80"
+                        alt="Jeep di Lautan Pasir Bromo">
+                    <div class="gallery-overlay">
+                        <h3>Armada Jeep 4x4</h3>
+                        <p>Lautan Pasir Bromo</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
+                        alt="Kawah Ijen Blue Fire">
+                    <div class="gallery-overlay">
+                        <h3>Kawah Ijen</h3>
+                        <p>Fenomena Blue Fire</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1626015365107-133fc400a45d?auto=format&fit=crop&w=800&q=80"
+                        alt="Savana Teletubbies Bromo">
+                    <div class="gallery-overlay">
+                        <h3>Savana Teletubbies</h3>
+                        <p>Padang Rumput Hijau Bromo</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+                        alt="Pemandangan Danau Kawah Ijen">
+                    <div class="gallery-overlay">
+                        <h3>Danau Asam Ijen</h3>
+                        <p>Pagi Hari di Kawah Ijen</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+                        alt="Pasir Berbisik Bromo">
+                    <div class="gallery-overlay">
+                        <h3>Pasir Berbisik</h3>
+                        <p>Eksplorasi Kaldera Bromo</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1301,62 +1404,58 @@
     <section id="contact">
         <div class="wrap contact-grid">
             <div class="contact-info">
-                <p class="section-kicker">Contact</p>
-                <h2>Rencanakan perjalanan Anda</h2>
-                <p style="color:var(--ink-soft); margin-top:14px; max-width:42ch;">Kirim tanggal dan tujuan yang Anda
-                    inginkan, tim kami akan membalas dalam beberapa jam untuk menyusun jadwal terbaik.</p>
-
+                <p class="section-kicker">Kontak &amp; Reservasi</p>
+                <h2>Mari rencanakan perjalanan Anda.</h2>
+                <p style="color: var(--ink-soft); margin-bottom: 24px;">Hubungi tim kami untuk konsultasi rute, cek
+                    ketersediaan jeep, atau kustomisasi paket tur sesuai kebutuhan Anda.</p>
                 <dl>
                     <div>
-                        <dt>WhatsApp</dt>
+                        <dt>WHATSAPP / TELEPON</dt>
                         <dd><a href="https://wa.me/6281234567890">+62 812-3456-7890</a></dd>
                     </div>
                     <div>
-                        <dt>Email</dt>
-                        <dd><a href="mailto:hello@adhimuktitrans.com">hello@adhimuktitrans.com</a></dd>
+                        <dt>ALAMAT GARASI / KANTOR</dt>
+                        <dd>Jl. Raya Bromo No. 45, Sukapura, Kabupaten Probolinggo, Jawa Timur</dd>
                     </div>
                     <div>
-                        <dt>Basecamp</dt>
-                        <dd>Jl. Raya Cemoro Lawang, Probolinggo, Jawa Timur</dd>
-                    </div>
-                    <div>
-                        <dt>Jam operasional</dt>
-                        <dd>24 jam, siap merespon pesan kapan saja</dd>
+                        <dt>JAM OPERASIONAL</dt>
+                        <dd>Layanan Lapangan: 24 Jam Nonstop<br>Layanan Admin: 06.00 - 22.00 WIB</dd>
                     </div>
                 </dl>
             </div>
 
-            <form id="contactForm">
-                <div class="field-row">
-                    <div>
-                        <label for="name">Nama lengkap</label>
-                        <input id="name" type="text" placeholder="Nama Anda" required>
+            <div>
+                <form id="contactForm">
+                    <div class="field-row">
+                        <div>
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" required placeholder="Contoh: Budi Santoso">
+                        </div>
+                        <div>
+                            <label for="phone">Nomor WhatsApp</label>
+                            <input type="tel" id="phone" required placeholder="0812345678xx">
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div>
+                            <label for="date">Rencana Tanggal Wisata</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div>
+                            <label for="package">Pilihan Tujuan / Paket</label>
+                            <input type="text" id="package" placeholder="Sewa Jeep / Bromo / Ijen / Combo">
+                        </div>
                     </div>
                     <div>
-                        <label for="phone">Nomor WhatsApp</label>
-                        <input id="phone" type="tel" placeholder="08xx-xxxx-xxxx" required>
+                        <label for="message">Pesan / Catatan Tambahan</label>
+                        <textarea id="message"
+                            placeholder="Tuliskan jumlah rombongan, lokasi penjemputan, atau pertanyaan lainnya..."></textarea>
                     </div>
-                </div>
-                <div class="field-row">
-                    <div>
-                        <label for="date">Tanggal keberangkatan</label>
-                        <input id="date" type="date">
-                    </div>
-                    <div>
-                        <label for="dest">Tujuan</label>
-                        <input id="dest" type="text" placeholder="Bromo, Ijen, atau keduanya">
-                    </div>
-                </div>
-                <div>
-                    <label for="message">Pesan</label>
-                    <textarea id="message"
-                        placeholder="Ceritakan jumlah orang, penginapan, atau kebutuhan khusus lainnya"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Kirim permintaan</button>
-                <p class="form-note">Atau langsung chat kami di WhatsApp untuk balasan lebih cepat.</p>
-                <div id="form-success">Terima kasih, permintaan Anda sudah kami terima. Tim kami akan menghubungi Anda
-                    melalui WhatsApp.</div>
-            </form>
+                    <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Kirim Pesan via
+                        WhatsApp</button>
+                    <div id="form-success">Terima kasih, Anda akan diarahkan ke WhatsApp kami...</div>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -1366,73 +1465,87 @@
             <div class="footer-top">
                 <div>
                     <div class="footer-brand">
-                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 30L14 14L20 22L26 12L36 30" stroke="currentColor" stroke-width="2"
-                                stroke-linejoin="round" stroke-linecap="round" />
-                            <circle cx="28" cy="10" r="3.2" stroke="currentColor" stroke-width="2" />
-                        </svg>
-                        Adhimukti Trans
+                        <img src="logo.jpeg" alt="Logo Adhimukti Trans">
+                        <span>Adhimukti Trans</span>
                     </div>
-                    <p>Transportasi wisata menuju Gunung Bromo dan Kawah Ijen, dengan sopir berpengalaman dan armada
-                        yang selalu siap.</p>
+                    <p>Spesialis transportasi dan tur private Gunung Bromo &amp; Kawah Ijen dengan armada 4x4 andal dan
+                        pengemudi profesional lokal.</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Navigasi</h4>
+                    <h4>NAVIGASI</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#service">Service</a></li>
                         <li><a href="#packages">Tour Packages</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Terhubung</h4>
+                    <h4>DESTINASI</h4>
                     <ul>
-                        <li><a href="https://wa.me/6281234567890">WhatsApp</a></li>
-                        <li><a href="mailto:hello@adhimuktitrans.com">Email</a></li>
-                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#packages">Sunrise Penanjakan Bromo</a></li>
+                        <li><a href="#packages">Lautan Pasir &amp; Kawah Bromo</a></li>
+                        <li><a href="#packages">Blue Fire Kawah Ijen</a></li>
+                        <li><a href="#packages">Transfer Bandara &amp; Stasiun</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>© 2026 Adhimukti Trans. Semua hak dilindungi.</span>
-                <span>Probolinggo, Jawa Timur, Indonesia</span>
+                <div>&copy; 2026 Adhimukti Trans. Hak Cipta Dilindungi.</div>
+                <div>Layanan Transportasi Wisata Jawa Timur</div>
             </div>
         </div>
     </footer>
 
     <script>
+        // Header scroll effect
         const header = document.getElementById('site-header');
         window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 40);
+            if (window.scrollY > 40) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
 
+        // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const siteNav = document.getElementById('site-nav');
+
         menuToggle.addEventListener('click', () => {
-            const open = siteNav.classList.toggle('open');
-            menuToggle.classList.toggle('open', open);
-            menuToggle.setAttribute('aria-expanded', open);
+            const isOpen = siteNav.classList.toggle('open');
+            menuToggle.classList.toggle('open', isOpen);
+            menuToggle.setAttribute('aria-expanded', isOpen);
         });
-        siteNav.querySelectorAll('a').forEach(link => {
+
+        // Close mobile nav when link is clicked
+        document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 siteNav.classList.remove('open');
                 menuToggle.classList.remove('open');
-                menuToggle.setAttribute('aria-expanded', false);
+                menuToggle.setAttribute('aria-expanded', 'false');
             });
         });
 
-        const form = document.getElementById('contactForm');
-        const success = document.getElementById('form-success');
-        form.addEventListener('submit', (e) => {
+        // Form Submit Redirect to WhatsApp
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            success.classList.add('show');
-            form.querySelectorAll('input, textarea').forEach(f => f.value = '');
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const pkg = document.getElementById('package').value;
+            const msg = document.getElementById('message').value;
+
+            const text = `Halo Adhimukti Trans, saya ingin bertanya/reservasi:%0A%0A- *Nama:* ${name}%0A- *No HP:* ${phone}%0A- *Tanggal:* ${date}%0A- *Paket/Tujuan:* ${pkg}%0A- *Pesan:* ${msg}`;
+
+            document.getElementById('form-success').classList.add('show');
+            setTimeout(() => {
+                window.open(`https://wa.me/6281234567890?text=${text}`, '_blank');
+            }, 1000);
         });
     </script>
-
 </body>
 
 </html>
